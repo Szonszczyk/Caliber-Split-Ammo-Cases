@@ -16,5 +16,5 @@ Reach me out on discord "Szonszczyk" and tell me all about it!
 
 ## Credits
 
-Part of codebase by GroovypenguinX
+Part of codebase by GroovypenguinX   
 Based on idea from ragnaroks-SPTarkovAmmoCases
