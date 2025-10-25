@@ -49,6 +49,15 @@ export class CustomItemService
             for(const loot in airdropLoot) {
                 airdropLoot[loot].itemBlacklist.push(itemId);
             }
+            const itemsCase = this.Instance.database.templates.items["59fb042886f7746c5005a7b2"];
+            const thiccItemsCase = this.Instance.database.templates.items["5c0a840b86f7742ffa4f2482"];
+
+            if (itemsCase._props.Grids[0]._props.filters[0]) {
+                itemsCase._props.Grids[0]._props.filters[0].Filter.push(itemId);
+            }
+            if (thiccItemsCase._props.Grids[0]._props.filters[0]) {
+                thiccItemsCase._props.Grids[0]._props.filters[0].Filter.push(itemId);
+            }
             numItemsAdded++;
         }
 

@@ -30,8 +30,7 @@ export class CasesGeneration
                     BackgroundColor: this.Instance.helpers.colorConverterAPILoaded ? config.backgroundColorColorConverterAPI : config.backgroundColor,
                     Weight: 0,
                     Width: config.Width,
-                    Height: config.Height,
-                    CanSellOnRagfair: config.fleaMarketBlacklisted
+                    Height: config.Height
                 },
                 parentId: "5795f317245977243854e041",
                 handbookParentId: "5b5f6fa186f77409407a7eb7",
@@ -76,7 +75,7 @@ export class CasesGeneration
             } else {
                 this.addGridsAmmoPerColumn(caseId, newCase, ammo);
             }
-            
+
             generatedItems[caseId] = newCase;
         }
         if (JSON.stringify(idDatabaseOriginal, null, 2) != JSON.stringify(idDatabase, null, 2) ) {
@@ -215,20 +214,23 @@ export class CasesGeneration
 
         const config = this.Instance.helpers.config;
 
-        const bulletTypes = ["grenade", "bullet", "buckshot"];
-
         for (const id in items) {
             const item = items[id];
-            if (bulletTypes.includes(item._props.ammoType)) {
-                // only use known calibers
-                if (config.useOnlyKnownCalibers && !ammoConfig[item._props.Caliber]) continue;
 
-                // use all calibers, just remove known bad/unnecessary ones
-                if (config.removeBadCalibers && config.badCalibers.includes(item._props?.Caliber)) continue;
-                
-                if (!ammo[item._props.Caliber]) ammo[item._props.Caliber] = [];
-                ammo[item._props.Caliber].push(id);
-            }
+            // only add items of type ammo
+            if (item._parent != "5485a8684bdc2da71d8b4567") continue;
+
+            if (id === "5485a8684bdc2da71d8b4567") continue;
+
+            // only use known calibers
+            if (config.useOnlyKnownCalibers && !ammoConfig[item._props.Caliber]) continue;
+
+            // use all calibers, just remove known bad/unnecessary ones
+            if (config.removeBadCalibers && config.badCalibers.includes(item._props?.Caliber)) continue;
+            
+            if (!ammo[item._props.Caliber]) ammo[item._props.Caliber] = [];
+            ammo[item._props.Caliber].push(id);
+
         }
 
         // Sort each array by PenetrationPower
